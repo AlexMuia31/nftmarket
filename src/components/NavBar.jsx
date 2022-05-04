@@ -1,6 +1,7 @@
 import React from "react";
 import { AppBar, Box, Button, Container, Toolbar } from "@mui/material";
 import logo from "../assets/logo.svg";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   return (
@@ -9,7 +10,9 @@ const NavBar = () => {
         <Toolbar>
           <Container maxWidth="xl" sx={{ display: "flex" }}>
             <Box sx={{ flex: 0.3, alignItems: "center", display: "flex" }}>
-              <img src={logo} height="100px" alt="logo" />
+              <Link to="/">
+                <img src={logo} height="100px" alt="logo" />
+              </Link>
             </Box>
             <Box
               sx={{
@@ -21,7 +24,15 @@ const NavBar = () => {
             >
               <Box sx={{ cursor: "pointer" }}>Explore</Box>
               <Box sx={{ cursor: "pointer" }}>Collectors</Box>
-              <Box sx={{ cursor: "pointer" }}>Create</Box>
+              <Box sx={{ cursor: "pointer" }}>
+                {" "}
+                <Link
+                  style={{ textDecoration: "none", color: "white" }}
+                  to="/create"
+                >
+                  Create
+                </Link>
+              </Box>
               <Box sx={{ cursor: "pointer" }}>Resources</Box>
             </Box>
             <Box

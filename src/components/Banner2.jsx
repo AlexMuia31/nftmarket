@@ -66,6 +66,24 @@ const Banner2 = () => {
                 </Box>
               </Box>
             </Grid>
+            <Grid
+              item
+              xs={12}
+              md={4}
+              sx={{ paddingTop: "5%", display: "flex", alignItems: "center" }}
+            >
+              <Box>
+                <Typography
+                  sx={{
+                    fontSize: "48px",
+                    fontWeight: "bold",
+                    color: "#0ce33",
+                  }}
+                >
+                  I swear this is cool
+                </Typography>
+              </Box>
+            </Grid>
           </Grid>
         </Box>
 
