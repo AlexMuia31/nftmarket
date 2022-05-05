@@ -22,7 +22,12 @@ const NavBar = () => {
                 display: { xs: "none", sm: "flex" },
               }}
             >
-              <Box sx={{ cursor: "pointer" }}>Explore</Box>
+              <Link
+                to="/explore"
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                <Box sx={{ cursor: "pointer" }}>Explore</Box>
+              </Link>
               <Box sx={{ cursor: "pointer" }}>Collectors</Box>
               <Box sx={{ cursor: "pointer" }}>
                 {" "}

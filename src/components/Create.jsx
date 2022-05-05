@@ -5,10 +5,10 @@ import Upload from "./upload";
 
 const Create = () => {
   return (
-    <Box sx={{ backgroundColor: "#b4b7bf", height: "100vh" }}>
+    <Box sx={{ backgroundColor: "#b4b7bf", minHeight: "100vh" }}>
       <Toolbar />
       <Toolbar />
-      <Container
+      <Box
         sx={{
           display: "flex",
           justifyContent: "center",
@@ -41,7 +41,7 @@ const Create = () => {
         >
           Create & List NFT !
         </Button>
-      </Container>
+      </Box>
     </Box>
   );
 };
