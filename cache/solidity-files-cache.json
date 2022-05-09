@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/home/alex/Desktop/Web3/nftmarket/contracts/Marketplace.sol": {
-      "lastModificationDate": 1651829799641,
-      "contentHash": "a7c26bcfb870c1a87505d4e87752bfef",
+      "lastModificationDate": 1652095106596,
+      "contentHash": "5ff6d2dabf5445cea0524adc1a87d881",
       "sourceName": "contracts/Marketplace.sol",
       "solcConfig": {
         "version": "0.8.4",
