@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import Create from "./components/Create";
 import Home from "./components/Home";
 import Explore from "./components/Explore";
+import MyPurchases from "./components/MyPurchases";
 import { ethers } from "ethers";
 import { useState } from "react";
 import MarketplaceAbi from "./Marketplace.json";
@@ -47,10 +48,15 @@ function App() {
   return (
     <Container maxWidth="xxl" disableGutters={true}>
       <NavBar account={account} web3Handler={web3Handler} />
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/create" element={<Create />} />
-        <Route path="/explore" element={<Explore />} />
+        <Route
+          path="/explore"
+          element={<Explore marketplace={marketplace} nft={nft} />}
+        />
+        <Route path="/myPurchases" element={<MyPurchases />} />
       </Routes>
     </Container>
   );

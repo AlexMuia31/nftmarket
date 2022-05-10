@@ -38,7 +38,14 @@ const NavBar = ({ web3Handler, account }) => {
                   Create
                 </Link>
               </Box>
-              <Box sx={{ cursor: "pointer" }}>Resources</Box>
+              <Box sx={{ cursor: "pointer" }}>
+                <Link
+                  style={{ textDecoration: "none", color: "white" }}
+                  to="/myPurchases"
+                >
+                  MyPurchases
+                </Link>
+              </Box>
             </Box>
             <Box
               sx={{
