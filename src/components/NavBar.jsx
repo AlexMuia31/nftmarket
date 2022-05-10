@@ -3,7 +3,7 @@ import { AppBar, Box, Button, Container, Toolbar } from "@mui/material";
 import logo from "../assets/logo.svg";
 import { Link } from "react-router-dom";
 
-const NavBar = () => {
+const NavBar = ({ web3Handler, account }) => {
   return (
     <Box>
       <AppBar sx={{ backgroundColor: "#000002" }}>
@@ -48,16 +48,30 @@ const NavBar = () => {
                 alignItems: "center",
               }}
             >
-              <Button
-                sx={{
-                  border: "1px solid white",
-                  color: "white",
-                  borderRadius: "20px",
-                  height: "50px",
-                }}
-              >
-                Connect Wallet
-              </Button>
+              {account ? (
+                <Button
+                  sx={{
+                    border: "1px solid white",
+                    color: "white",
+                    borderRadius: "20px",
+                    height: "50px",
+                  }}
+                >
+                  {account.slice(0, 5) + "..." + account.slice(38, 42)}
+                </Button>
+              ) : (
+                <Button
+                  sx={{
+                    border: "1px solid white",
+                    color: "white",
+                    borderRadius: "20px",
+                    height: "50px",
+                  }}
+                  onClick={web3Handler}
+                >
+                  Connect Wallet
+                </Button>
+              )}
             </Box>
           </Container>
         </Toolbar>
