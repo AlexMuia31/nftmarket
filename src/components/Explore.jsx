@@ -88,17 +88,15 @@ const Explore = ({ marketplace, nft }) => {
                     <CardMedia
                       component="img"
                       height="200"
-                      image="/static/images/cards/contemplative-reptile.jpg"
+                      image={item.image}
                       alt="green iguana"
                     />
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="div">
-                        Lizard
+                        {item.name}
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
-                        Lizards are a widespread group of squamate reptiles,
-                        with over 6,000 species, ranging across all continents
-                        except Antarctica
+                        {item.description}
                       </Typography>
                     </CardContent>
                   </CardActionArea>
@@ -110,8 +108,9 @@ const Explore = ({ marketplace, nft }) => {
                         color: "white",
                         "&:hover, &:focus": { background: "#000002" },
                       }}
+                      onClick={() => buyMarketItem(item)}
                     >
-                      Buy for price
+                      Buy for {ethers.utils.formatEther(item.totalPrice)} ETH
                     </Button>
                   </CardActions>
                 </Card>

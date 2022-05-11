@@ -1,7 +1,11 @@
 import React from "react";
-import { Box, Button, Container, Toolbar } from "@mui/material";
+import { Box, Button, Toolbar } from "@mui/material";
 import { CssTextField } from "./TextField";
 import Upload from "./upload";
+import { ethers } from "ethers";
+import { create as ipfsHttpClient } from "ipfs-http-client";
+
+const client = ipfsHttpClient("https://ipfs.infura.io:5001/api/v0");
 
 const Create = () => {
   return (
