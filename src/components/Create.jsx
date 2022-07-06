@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Toolbar } from "@mui/material";
+import { Box, Button, Container, Toolbar } from "@mui/material";
 import { CssTextField } from "./TextField";
 import Upload from "./upload";
 import { ethers } from "ethers";
@@ -9,35 +9,20 @@ const client = ipfsHttpClient("https://ipfs.infura.io:5001/api/v0");
 
 const Create = () => {
   return (
-    <Box sx={{ backgroundColor: "#b4b7bf", minHeight: "100vh" }}>
+    <Box sx={{ backgroundColor: "#b4b7bf", }}>
       <Toolbar />
       <Toolbar />
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "column",
-        }}
-      >
-        <Upload />
-        <CssTextField label="Name" sx={{ width: "50%" }} />
-        <CssTextField
-          sx={{
-            width: "50%",
-            mt: "2%",
-          }}
-          multiline
-          minRows={5}
-          placeholder="Add a description"
-        />
-        <CssTextField label="Price in ETH" sx={{ width: "50%", mt: "2%" }} />
-        <Button
+      <Container sx={{minHeight: "100vh",}}>
+        <Box sx={{display:'flex', justifyContent:'center', alignItems:'center', flexDirection:'column'}}>
+          <CssTextField label="Name" sx={{width:'80%', mt:'2%'}}/>
+          <CssTextField multiline minRows={4} sx={{width:'80%', mt:'4%'}} placeholder="Add a Description"/>
+          <CssTextField label="Price in ETH" sx={{width:'80%', mt:'4%'}}/>
+          <Button
           sx={{
             backgroundColor: "#000002",
             color: "white",
-            width: "50%",
-            mt: "2%",
+            width: "80%",
+            mt: "4%",
             "&:hover,&:focus": {
               background: "#000002",
             },
@@ -45,7 +30,8 @@ const Create = () => {
         >
           Create & List NFT !
         </Button>
-      </Box>
+        </Box>
+      </Container>
     </Box>
   );
 };

@@ -6,7 +6,7 @@ import { FaEthereum } from "react-icons/fa";
 
 const Banner2 = () => {
   return (
-    <Box sx={{ backgroundColor: "#b4b7bf", contain: "layout" }}>
+    <Box sx={{ backgroundColor: "#b4b7bf", contain: "layout" , minHeight:'50vh'}}>
       <Container maxWidth="xl" sx={{ paddingTop: "5%" }}>
         <Box
           sx={{

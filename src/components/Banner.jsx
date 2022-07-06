@@ -12,7 +12,7 @@ import React from "react";
 
 const Banner = () => {
   return (
-    <Box sx={{ backgroundColor: "#000002", paddingBottom: "2%" }}>
+    <Box sx={{ backgroundColor: "#000002", paddingBottom: "2%", minHeight:'50vh' }}>
       <Toolbar />
       <Toolbar />
       <Container maxWidth="xl">

@@ -12,7 +12,8 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
-import CircularProgress from "@mui/material/CircularProgress";
+
+import Loader from "./Loader";
 
 const Explore = ({ marketplace, nft }) => {
   const [items, setItems] = useState([]);
@@ -54,24 +55,7 @@ const Explore = ({ marketplace, nft }) => {
     loadMarketplaceItems();
   });
 
-  if (loading)
-    return (
-      <Box
-        sx={{
-          display: "flex",
-          minHeight: "100vh",
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "column",
-          background: "#b4b7bf",
-        }}
-      >
-        <CircularProgress />
-        <Typography sx={{ mt: "2%" }}>
-          Connect your metamask to continue...
-        </Typography>
-      </Box>
-    );
+  if (loading) return <Loader/>
 
   return (
     <Box sx={{ background: "#b4b7bf", minHeight: "100vh" }}>
