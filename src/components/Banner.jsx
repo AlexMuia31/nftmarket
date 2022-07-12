@@ -64,7 +64,7 @@ const Banner = () => {
                 alignItems: "center",
                 justifyContent: "space-between",
                 width: "100%",
-                border: "1px solid #0fe9ef",
+                border: "2px solid #0fe9ef",
                 borderRadius: "20px",
                 mt: "2%",
               }}
@@ -125,10 +125,10 @@ const Banner = () => {
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    border: "1px solid #0fe9ef",
+                    border: "2px solid #0fe9ef",
                     height: "150px",
                     width: "150px",
-                    borderRadius: "50%",
+                    borderRadius: "50% !important",
                   }}
                 >
                   <img src={logo} alt="" />
