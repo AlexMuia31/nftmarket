@@ -2,8 +2,12 @@ import React from "react";
 import { AppBar, Box, Button, Container, Toolbar } from "@mui/material";
 import logo from "../assets/logo.svg";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { TransactionContext } from "./context/TransactionContext";
 
-const NavBar = ({ web3Handler, account }) => {
+const NavBar = () => {
+  const { connectWallet, address } = useContext(TransactionContext);
+
   return (
     <Box>
       <AppBar sx={{ backgroundColor: "#000002" }}>
@@ -55,7 +59,7 @@ const NavBar = ({ web3Handler, account }) => {
                 alignItems: "center",
               }}
             >
-              {account ? (
+              {address ? (
                 <Button
                   sx={{
                     border: "1px solid white",
@@ -64,7 +68,7 @@ const NavBar = ({ web3Handler, account }) => {
                     height: "50px",
                   }}
                 >
-                  {account.slice(0, 5) + "..." + account.slice(38, 42)}
+                  {address.slice(0, 6) + "..." + address.slice(-4)}
                 </Button>
               ) : (
                 <Button
@@ -74,9 +78,9 @@ const NavBar = ({ web3Handler, account }) => {
                     borderRadius: "20px",
                     height: "50px",
                   }}
-                  onClick={web3Handler}
+                  onClick={connectWallet}
                 >
-                  Connect Wallet
+                  Connect Wallet {address}
                 </Button>
               )}
             </Box>

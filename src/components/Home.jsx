@@ -5,7 +5,7 @@ import Banner2 from "./Banner2";
 
 const Home = () => {
   return (
-    <Box sx={{height:'100vh'}}>
+    <Box sx={{ height: "100vh" }}>
       <Banner />
       <Banner2 />
     </Box>
