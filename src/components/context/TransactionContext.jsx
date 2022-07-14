@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { providers, Contract } from "ethers";
 import Web3Modal from "web3modal";
+import { create as ipfsHttpClient } from "ipfs-http-client";
 
 import {
   nftContractABI,
@@ -8,6 +9,8 @@ import {
   marketPlaceContractAddress,
   marketPlaceContractABI,
 } from "../../Constants/index";
+
+const client = ipfsHttpClient("https://ipfs.infura.io:5001/api/v0");
 
 export const TransactionContext = React.createContext();
 
@@ -18,8 +21,27 @@ export const TransactionProvider = ({ children }) => {
   const [nft, setNFT] = useState({});
   const [marketplace, setMarketPlace] = useState({});
   const [items, setItems] = useState([]);
+  const [image, setImage] = useState("");
+  const [price, setPrice] = useState(null);
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
   // Create a reference to the Web3 Modal (used for connecting to Metamask) which persists as long as the page is open
   const web3ModalRef = useRef();
+
+  //uploading to ipfs
+  const uploadToIPFS = async (event) => {
+    event.preventDefault();
+    const file = event.target.files[0];
+    if (typeof file !== "undefined") {
+      try {
+        const result = await client.add(file);
+        console.log(result);
+        setImage(`https://ipfs.infura.io/ipfs/${result.path}`);
+      } catch (error) {
+        console.log("ipfs image upload error: ", error);
+      }
+    }
+  };
 
   const getProviderOrSigner = async (needSigner = false) => {
     // Connect to Metamask
