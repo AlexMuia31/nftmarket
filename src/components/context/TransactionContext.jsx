@@ -8,12 +8,16 @@ import {
   marketPlaceContractAddress,
   marketPlaceContractABI,
 } from "../../Constants/index";
+import { SentimentSatisfiedTwoTone } from "@mui/icons-material";
 
 export const TransactionContext = React.createContext();
 
 export const TransactionProvider = ({ children }) => {
   const [walletConnected, setWalletConnected] = useState(false);
   const [address, setAddress] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [nft, setNFT] = useState({});
+  const [marketplace, setMarketPlace] = useState({});
   // Create a reference to the Web3 Modal (used for connecting to Metamask) which persists as long as the page is open
   const web3ModalRef = useRef();
 
@@ -47,6 +51,24 @@ export const TransactionProvider = ({ children }) => {
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const loadcontracts = async () => {
+    try {
+      const signer = await getProviderOrSigner(true);
+      //get deployed copies of contracts
+      const marketplace = new Contract(
+        marketPlaceContractAddress,
+        marketPlaceContractABI,
+        signer
+      );
+      setMarketPlace(marketplace);
+      const nft = new Contract(nftContractAddress, nftContractABI, signer);
+      setNFT(nft);
+    } catch (error) {
+      console.log(error);
+    }
+    setLoading(false);
   };
 
   useEffect(() => {
