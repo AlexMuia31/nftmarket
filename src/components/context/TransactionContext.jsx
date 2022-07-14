@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { ethers, providers, Contract } from "ethers";
+import { providers, Contract } from "ethers";
 import Web3Modal from "web3modal";
 
 import {
@@ -8,7 +8,6 @@ import {
   marketPlaceContractAddress,
   marketPlaceContractABI,
 } from "../../Constants/index";
-import { SentimentSatisfiedTwoTone } from "@mui/icons-material";
 
 export const TransactionContext = React.createContext();
 
@@ -18,6 +17,7 @@ export const TransactionProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [nft, setNFT] = useState({});
   const [marketplace, setMarketPlace] = useState({});
+  const [items, setItems] = useState([]);
   // Create a reference to the Web3 Modal (used for connecting to Metamask) which persists as long as the page is open
   const web3ModalRef = useRef();
 
@@ -52,7 +52,7 @@ export const TransactionProvider = ({ children }) => {
       console.error(error);
     }
   };
-
+  //loading contracts
   const loadcontracts = async () => {
     try {
       const signer = await getProviderOrSigner(true);
@@ -71,6 +71,59 @@ export const TransactionProvider = ({ children }) => {
     setLoading(false);
   };
 
+  //Loading marketplace Items
+  const loadMarketPlaceItems = async () => {
+    const provider = await getProviderOrSigner();
+    const marketplace = new Contract(
+      marketPlaceContractAddress,
+      marketPlaceContractABI,
+      provider
+    );
+    const nft = new Contract(nftContractAddress, nftContractABI, provider);
+    const itemCount = await marketplace.itemCount();
+    let items = [];
+    for (let i = 1; (i = itemCount); i++) {
+      const item = await marketplace.items(i);
+      if (!item.sold) {
+        //get uri url from nft contract
+        const uri = await nft.tokenURI(item.tokenId);
+        //use the above uri to fetch the nft metadata stored on IPFS
+        const response = await fetch(uri);
+        const metadata = await response.json();
+        //get total price of item (item price + fee)
+        const totalPrice = await marketplace.getTotalPrice(item.itemId);
+        //Add item to items Array
+        items.push({
+          totalPrice,
+          itemId: item.itemId,
+          seller: item.seller,
+          name: metadata.name,
+          description: metadata.description,
+          image: metadata.image,
+        });
+      }
+    }
+    setItems(items);
+    setLoading(false);
+  };
+
+  const buyMarketItem = async (item) => {
+    const signer = await getProviderOrSigner(true);
+    const marketplace = new Contract(
+      marketPlaceContractAddress,
+      marketPlaceContractABI,
+      signer
+    );
+    await (
+      await marketplace.purchaseItem(item.itemId, { value: item.totalPrice })
+    ).wait();
+    loadMarketPlaceItems();
+  };
+
+  useEffect(() => {
+    loadMarketPlaceItems();
+  });
+
   useEffect(() => {
     if (!walletConnected) {
       web3ModalRef.current = new Web3Modal({
@@ -84,7 +137,17 @@ export const TransactionProvider = ({ children }) => {
 
   return (
     <TransactionContext.Provider
-      value={{ connectWallet, walletConnected, address }}
+      value={{
+        connectWallet,
+        walletConnected,
+        address,
+        loading,
+        marketplace,
+        nft,
+        items,
+        buyMarketItem,
+        loadcontracts,
+      }}
     >
       {children}
     </TransactionContext.Provider>

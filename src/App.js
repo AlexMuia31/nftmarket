@@ -7,9 +7,12 @@ import Home from "./components/Home";
 import Explore from "./components/Explore";
 import MyPurchases from "./components/MyPurchases";
 import { ethers } from "ethers";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { TransactionContext } from "./components/context/TransactionContext";
+import Loader from "./components/Loader";
 
 function App() {
+  const { loading } = useContext(TransactionContext);
   return (
     <Container maxWidth="xxl" disableGutters={true}>
       <NavBar />
